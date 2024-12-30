@@ -37,8 +37,8 @@ export const checkFileName = (fileHandles) =>
     
     for (let i = 1; i < filenames.length; i++)
     {
-        const prev_end_time = filenames[i - 1].split(/[_.]/)[3];
-        const current_start_time = filenames[i].split(/[_.]/)[2];
+        const [,prev_end_time] = convertFilenameToTime(filenames[i-1])
+        const [current_start_time,] = convertFilenameToTime(filenames[i])
         if (prev_end_time !== current_start_time)
         {
             console.log("not continue")
@@ -47,6 +47,13 @@ export const checkFileName = (fileHandles) =>
     }
     return true;
 
+}
+
+export const convertFilenameToTime = (filename) =>
+{
+    const startTime = filename.split(/[_.]/)[2];
+    const endTime = filename.split(/[_.]/)[3];
+    return [startTime, endTime]
 }
 
 
